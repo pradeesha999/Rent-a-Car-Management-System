@@ -1,0 +1,31 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package model;
+import view.*;
+import java.sql.*;
+/**
+ *
+ * @author prade
+ */
+public class DBConnection {
+    static Connection con;
+    
+    public static Connection connectDB()
+    {
+        try
+        {
+            String path = "jdbc:mysql://localhost:3308/coursework";
+            //String path = "C:\\Users\\prade\\Downloads\\FinalCW\\CourseWork Nadith\\CourseWork\\src\\database";
+            con = DriverManager.getConnection(path,"root","");
+        }
+        
+        catch (SQLException e)
+        {
+            System.err.println("Exception "+e);
+        }
+        
+        return con;
+    }
+}

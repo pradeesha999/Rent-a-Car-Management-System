@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="java" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="74f46276-24e1-4714-a8ed-08a3d71df3aa">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT v.VehicleID, v.RegistrationPlateNumber AS 'Number Plate', v.VehicleType AS 'Vehicle Type', v.Model, COUNT(b.VehicleID) AS Bookings, COALESCE(SUM(b.TotalPrice), 0) AS 'Total Earnings' FROM Vehicle v LEFT JOIN Booking b ON v.VehicleID = b.VehicleID GROUP BY v.VehicleID, v.RegistrationPlateNumber, v.VehicleType, v.Model ORDER BY 'Total Earnings' DESC;]]>
+	</queryString>
+	<field name="VehicleID" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Number Plate" class="java.lang.String"/>
+	<field name="Vehicle Type" class="java.lang.String"/>
+	<field name="Model" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Bookings" class="java.lang.Long"/>
+	<field name="Total Earnings" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<image>
+				<reportElement x="10" y="10" width="183" height="62" uuid="9a9713cf-4259-45de-9ddd-ec88c384eb9d"/>
+				<imageExpression><![CDATA["C:\\Users\\prade\\Downloads\\FinalCW\\CourseWork Nadith\\CourseWork\\src\\Images\\logo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="193" y="10" width="368" height="62" uuid="066beb93-92fb-423c-bd1a-1d1c3c49a97e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="29" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Riyawiyana Rental Company]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="153" y="86" width="277" height="32" uuid="7559a0e1-5b96-49d4-9ad4-77a58d59bd00"/>
+				<textElement>
+					<font fontName="Times New Roman" size="24" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Vehicle Performance Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="63993015-b8e7-4e90-abb0-a326975e2270"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="0" width="92" height="15" forecolor="#736343" uuid="199809ba-cd24-4fe7-ba6a-0c9893bffc6a"/>
+				<text><![CDATA[VehicleID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="92" y="0" width="92" height="15" forecolor="#736343" uuid="9bf9a2c7-7f60-4bb6-b6b6-98fd002c61eb"/>
+				<text><![CDATA[Number Plate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="184" y="0" width="92" height="15" forecolor="#736343" uuid="a8644bf7-a4fc-479d-a0ad-829db5644178"/>
+				<text><![CDATA[Vehicle Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="276" y="0" width="92" height="15" forecolor="#736343" uuid="506dc7fe-4904-430d-9f41-7d809655a176"/>
+				<text><![CDATA[Model]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="368" y="0" width="92" height="15" forecolor="#736343" uuid="b8240824-37e7-4470-8b1f-944002d8cfe9"/>
+				<text><![CDATA[Bookings]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="460" y="0" width="92" height="15" forecolor="#736343" uuid="4eba09bb-f33f-4ed5-a97f-0e6fffe46b0c"/>
+				<text><![CDATA[Total Earnings]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="15" uuid="4a148472-b1ec-487c-b592-dae2e7ee9b17"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="0" y="0" width="92" height="15" uuid="d7269353-ce55-4494-aa9f-d5f418964e4d"/>
+					<textFieldExpression><![CDATA[$F{VehicleID}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="92" y="0" width="92" height="15" uuid="6bd0e7ad-3353-4697-ad59-b516646e816f"/>
+					<textFieldExpression><![CDATA[$F{Number Plate}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="184" y="0" width="92" height="15" uuid="a420256d-ff24-45fb-bd33-df8a649fe517"/>
+					<textFieldExpression><![CDATA[$F{Vehicle Type}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="276" y="0" width="92" height="15" uuid="97c5c4a8-8a1f-4a96-9908-b3df9b95007e"/>
+					<textFieldExpression><![CDATA[$F{Model}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="368" y="0" width="92" height="15" uuid="71400832-2919-4898-88b2-e4790c772668"/>
+					<textFieldExpression><![CDATA[$F{Bookings}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="460" y="0" width="92" height="15" uuid="6b114e7f-444b-49c3-8b80-7a762bf97a2e"/>
+					<textFieldExpression><![CDATA[$F{Total Earnings}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="ef56dde6-b4c1-46d4-863d-16db1d6c4315"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF" uuid="ccc7aa05-beae-4073-b7b9-27052f00932b"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="533" y="0" width="40" height="20" forecolor="#736343" uuid="a702b118-41c0-4fd3-8456-1c54b106b11a"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="453" y="0" width="80" height="20" forecolor="#736343" uuid="8898f840-e5b2-4821-958a-032f6422df91"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343" uuid="8a52063e-e228-42ed-a83e-73653df78884"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
